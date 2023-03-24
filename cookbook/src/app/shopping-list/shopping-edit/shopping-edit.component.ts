@@ -6,6 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -22,8 +23,10 @@ export class ShoppingEditComponent {
   @ViewChild('amountInput')
   public amount!: ElementRef<HTMLInputElement>;
 
+  constructor(private shoppingListService: ShoppingListService) {}
+
   public addIngredient() {
-    this.onAddIngredient.emit(
+    this.shoppingListService.addIngredient(
       new Ingredient(
         this.name.nativeElement.value,
         this.amount.nativeElement.valueAsNumber

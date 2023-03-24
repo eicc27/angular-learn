@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Recipe } from '../../recipe.model';
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -15,10 +16,9 @@ export class RecipeItemComponent {
   // ! is an assertion of not null and not undefined
   public recipe!: Recipe;
 
-  @Output('onRecipeDetail')
-  public recipeDetail = new EventEmitter<void>();
+  constructor(private recipeService: RecipeService) {}
 
   public showDetail() {
-    this.recipeDetail.emit();
+    this.recipeService.recipeSelected.emit(this.recipe);
   }
 }
